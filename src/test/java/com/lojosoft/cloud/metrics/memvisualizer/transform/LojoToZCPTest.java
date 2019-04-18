@@ -146,7 +146,6 @@ public class LojoToZCPTest {
 
         zcpTree = zcpTreeFromFoundation(foundation);
 
-
     }
 
     @Test

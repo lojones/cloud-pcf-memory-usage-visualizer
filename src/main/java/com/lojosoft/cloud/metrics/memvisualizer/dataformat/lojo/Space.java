@@ -3,6 +3,7 @@ package com.lojosoft.cloud.metrics.memvisualizer.dataformat.lojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 public class Space implements PcfMetaData {
     private String spaceName;
     @EqualsAndHashCode.Exclude private List<App> Apps;

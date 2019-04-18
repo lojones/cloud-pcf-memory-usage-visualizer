@@ -10,7 +10,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @RunWith(SpringRunner.class)
@@ -40,6 +42,8 @@ public class XlsReaderTest {
         List<List<String>> actual = XlsReader.readXls(f);
         Assert.assertEquals(18,actual.size());
         int i=0;
+        Set<String> paths = new HashSet<>();
+
         for (List<String> row: actual) {
 
             Assert.assertEquals(3, row.size());
@@ -48,6 +52,12 @@ public class XlsReaderTest {
                 Assert.assertTrue(row.get(0).contains("/"));
                 Assert.assertNotNull(Integer.valueOf(row.get(1)));
                 Assert.assertNotNull(Integer.valueOf(row.get(2)));
+                if (paths.contains(row.get(0))) {
+                    Assert.fail("Found duplicates of the same path ");
+                }
+                else {
+                    paths.add(row.get(0));
+                }
             }
             i++;
         }

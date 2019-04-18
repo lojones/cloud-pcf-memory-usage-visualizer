@@ -17,11 +17,20 @@ public class XlsReader {
         for (int i=0;i<=sheet.getLastRowNum();i++) {
             List<String> extractedRow = new ArrayList<>();
             extractedRows.add(extractedRow);
-            Row row = sheet.getRow(1);
+            Row row = sheet.getRow(i);
             for (int j=0;j<3;j++) {
                 Cell cell = row.getCell(j);
-                cell.setCellType(CellType.STRING);
-                String value = row.getCell(j).getStringCellValue();
+                String value;
+                if (cell.getCellTypeEnum() == CellType.STRING) {
+                    value = row.getCell(j).getStringCellValue();
+                }
+                else if (cell.getCellTypeEnum() == CellType.NUMERIC) {
+                    Double doubleval = row.getCell(j).getNumericCellValue();
+                    value = String.valueOf(Math.round(doubleval));
+                }
+                else {
+                    value = "1";
+                }
                 extractedRow.add(value);
             }
         }

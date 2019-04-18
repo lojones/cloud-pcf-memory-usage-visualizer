@@ -11,6 +11,17 @@ public class RehydrateToPojo {
 
     static Logger logger = LoggerFactory.getLogger(RehydrateToPojo.class);
 
+    private static String getMem(String raw) {
+        if (raw.trim().toUpperCase().endsWith("GB")) {
+            return String.valueOf(Integer.valueOf(raw.trim().toUpperCase().replaceAll("GB","").trim()) * 1000);
+        }
+        else if (raw.trim().toUpperCase().endsWith("MB")) {
+            return String.valueOf(Integer.valueOf(raw.trim().toUpperCase().replaceAll("MB","").trim()))    ;
+        }
+        else {
+            return raw;
+        }
+    }
     public static Foundation rehydrate(List<List<String>> rows) {
 
         List<Org> orgs = new ArrayList<>();
@@ -19,8 +30,8 @@ public class RehydrateToPojo {
 
         for (List<String> row : rows) {
             String path = row.get(0);
-            String memActual = row.get(1);
-            String memAlloc = row.get(2);
+            String memActual = getMem(row.get(1));
+            String memAlloc = getMem(row.get(2));
 
             logger.info("Parsing {}",path);
 
@@ -51,7 +62,14 @@ public class RehydrateToPojo {
                 String instanceName = pathItems[4];
                 Instance instance = app.findInstanceByName(instanceName);
                 if(instance == null) {
-                    instance = new Instance(instanceName,app.getPath()+"/"+instanceName,Integer.parseInt(memAlloc),Integer.parseInt(memActual),app);
+                    try {
+                        instance = new Instance(instanceName,app.getPath()+"/"+instanceName,Integer.parseInt(memAlloc),Integer.parseInt(memActual),app);
+                    } catch (Exception e) {
+                        logger.error("{} {} {} {} {}",instanceName, app.getPath(), memAlloc, memActual, e.getMessage());
+                    }
+
+
+
                     app.getInstances().add(instance);
                 }
                else {

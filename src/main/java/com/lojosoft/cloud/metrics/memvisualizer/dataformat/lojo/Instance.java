@@ -2,12 +2,14 @@ package com.lojosoft.cloud.metrics.memvisualizer.dataformat.lojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
+@ToString
 public class Instance implements PcfMetaData {
     private String instanceName;
     private String path;
