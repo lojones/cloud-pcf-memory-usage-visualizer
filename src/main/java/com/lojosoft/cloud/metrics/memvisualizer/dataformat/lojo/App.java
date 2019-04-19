@@ -11,12 +11,12 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode
-@ToString
+@ToString(onlyExplicitlyIncluded = true)
 public class App implements PcfMetaData {
-    private String appName;
-    @EqualsAndHashCode.Exclude private List<Instance> instances;
-    @EqualsAndHashCode.Exclude private String path;
-    @EqualsAndHashCode.Exclude private PcfMetaData parent;
+    @ToString.Include private String appName;
+    private List<Instance> instances;
+    @ToString.Include private String path;
+    private PcfMetaData parent;
 
     public Integer getMemAllocationMB() {
         int mem=0;

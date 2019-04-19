@@ -1,0 +1,32 @@
+{
+  "name": "pcf-mem-vis",
+  "version": "1.0.0",
+  "description": "To visualize memory usage and other metrics in a PCF foundation",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lojones/cloud-pcf-memory-usage-visualizer.git"
+  },
+  "keywords": [
+    "PCF",
+    "memory",
+    "cloud",
+    "foundry",
+    "visualization"
+  ],
+  "author": "Lojosoft",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lojones/cloud-pcf-memory-usage-visualizer/issues"
+  },
+  "homepage": "https://github.com/lojones/cloud-pcf-memory-usage-visualizer#readme",
+  "dependencies": {
+    "jquery": "^3.4.0"
+  }
+}

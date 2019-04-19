@@ -9,11 +9,11 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-@ToString
+@ToString(onlyExplicitlyIncluded = true)
 public class Foundation implements PcfMetaData {
-    private String foundationName;
+    @ToString.Include private String foundationName;
     private List<Org> orgs;
-    private String path;
+    @ToString.Include private String path;
     private PcfMetaData parent;
 
      public Integer getMemAllocationMB() {
